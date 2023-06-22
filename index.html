@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Просмотр логов Apache</h1>
+    <p>
+        <label for="localdate">Начальная дата: </label>
+        <input type="datetime-local" id="startdate" name="date" />
+    </p>
+    <p>
+        <label for="localdate">Конечная дата: </label>
+        <input type="datetime-local" id="enddate" name="date" />
+    </p>
+    <button id="getdata">Получить данные</button>
+    <button id="updatedb">Обновить базу данных</button>
+    <p>
+        <label>Записи за всё время</label>
+        <input id="getall" type="checkbox">
+    </p>
+    <table id="tablelog" border="1">
+        <tbody></tbody>
+    </table>
+    <script>
+        const updatedb = document.getElementById("updatedb");
+        const getdata = document.getElementById("getdata");
+        const startdate = document.getElementById("startdate");
+        const enddate = document.getElementById("enddate");
+        const tablelog = document.getElementById("tablelog").getElementsByTagName('tbody')[0];
+        const getall = document.getElementById("getall");
+        async function UpdateDB() {
+            const response = await fetch("http://127.0.0.1:5000/updateLogs", {
+                method: 'POST'
+            });
+
+            console.log(response.json())
+        }
+        async function getEntries() {
+            var response;
+            if (!getall.checked) {
+                response = await fetch("http://127.0.0.1:5000/getEntries?" + new URLSearchParams({
+                    from: startdate.value.slice(0, 10) + '-' + startdate.value.slice(11, 13) + '-' + startdate.value.slice(14) + '-00',
+                    to: enddate.value.slice(0, 10) + '-' + enddate.value.slice(11, 13) + '-' + enddate.value.slice(14) + '-00'
+                }), {
+                    method: 'GET',
+                });
+            } else {
+                response = await fetch("http://127.0.0.1:5000/getEntries?" + new URLSearchParams({
+                    from: "all"
+                }), {
+                    method: 'GET',
+                });
+            }
+            response.json().then(data => {
+                tablelog.innerHTML = '<tr><th>Address</th><th>Date</th></tr>';
+                data.forEach(element => {
+                    console.log(element)
+
+                    tablelog.innerHTML += `<tr><td >${element["address"]}</td><td>${element["date"]}</td></tr>`
+                });
+            });
+        }
+        updatedb.addEventListener("click", () => UpdateDB());
+        getdata.addEventListener("click", () => getEntries());
+    </script>
+</body>
+
+</html>
