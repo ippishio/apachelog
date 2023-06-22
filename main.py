@@ -22,7 +22,7 @@ def updateLogs():
         exit()
 
     for file in os.listdir(config['DEFAULT']['ApacheLogPath']):
-        if "access.log" in file:
+        if "access.log" in file and not file.endswith(".gz"):
             try:
                 f = open(config['DEFAULT']['ApacheLogPath'] +
                          ('/' if config['DEFAULT']['ApacheLogPath'][-1] != '/' else '')+file)
