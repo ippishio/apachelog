@@ -24,13 +24,13 @@ foo@bar:~$ pipenv run python3 main.py
 ## Request example
 
 ```http
-> POST http://127.0.0.1:5000/updateLogs
-> {"status" : "ok"}
+POST http://127.0.0.1:5000/updateLogs
+{"status" : "ok"}
 
-> GET http://127.0.0.1:5000/getEntries?from=2023-06-22-12-45-10&to=2023-06-24-15-34-00
-> [{"address" : "192.168.0.1", "date" : "2023-06-22-13-00-00}, ...]
+GET http://127.0.0.1:5000/getEntries?from=2023-06-22-12-45-10&to=2023-06-24-15-34-00
+[{"address" : "192.168.0.1", "date" : "2023-06-22-13-00-00}, ...]
 
-> GET http://127.0.0.1:5000/getEntries?from=all
-> [{"address" : "192.168.0.1", "date" : "2023-06-22-13-00-00}, ...]
+GET http://127.0.0.1:5000/getEntries?from=all
+[{"address" : "192.168.0.1", "date" : "2023-06-22-13-00-00}, ...]
 ```
 
