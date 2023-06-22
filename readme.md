@@ -20,7 +20,7 @@ foo@bar:~$ pipenv run python3 main.py
 ## Request format
 
 - `updateLogs` - **POST** method. Returns `{"status" : "ok"}`. Used to update database with log files. 
-- `getEntries`- **GET** method. Takes two arguments: `from` and `to`, which corresponds to start and end of timeframe. Returns array of **JSON**, each of them have `{"address" : "192.168.0.1", "date" : "2023-06-22-13-00-00}` structure. Date must be in `*YYYY-MM-DD-HH-mm-dd` format.
+- `getEntries`- **GET** method. Takes two arguments: `from` and `to`, which corresponds to start and end of timeframe. Returns array of **JSON**, each of them have `{"address" : "192.168.0.1", "date" : "2023-06-22-13-00-00}` structure. Date must be in **YYYY-MM-DD-HH-mm-dd** format. You can get all entries in database, by providing `from=all` argument. 
 ## Request example
 
 ```http
