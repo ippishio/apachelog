@@ -1,11 +1,12 @@
 # Apache log viewer
 This script allows you to access your **Apache webserver** logs using **POST/GET** requests, saving it to **PostgreSQl** database. Repository includes [index.html](index.html) with simple control panel, that uses this API, and also [cron.py](cron.py) script, which allows user to run this code with **cron**
+
 ## Creating table in database
 
 ```console
-foo@bar:~& sudo -i -u postgres
-postgres@bar:~& psql -U username -d myDataBase -a -f path/to/table.sql
-postgres@bar:~& exit
+foo@bar:~$ sudo -i -u postgres
+postgres@bar:~$ psql -U username -d myDataBase -a -f path/to/table.sql
+postgres@bar:~$ exit
 ```
 
 ## Installing dependecies and running server
